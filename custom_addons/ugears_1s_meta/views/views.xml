@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="ugears_1s_meta.list">
+      <field name="name">ugears_1s_meta list</field>
+      <field name="model">ugears_1s_meta.ugears_1s_meta</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="ugears_1s_meta.action_window">
+      <field name="name">ugears_1s_meta window</field>
+      <field name="res_model">ugears_1s_meta.ugears_1s_meta</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ugears_1s_meta.action_server">
+      <field name="name">ugears_1s_meta server</field>
+      <field name="model_id" ref="model_ugears_1s_meta_ugears_1s_meta"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ugears_1s_meta" id="ugears_1s_meta.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="ugears_1s_meta.menu_1" parent="ugears_1s_meta.menu_root"/>
+    <menuitem name="Menu 2" id="ugears_1s_meta.menu_2" parent="ugears_1s_meta.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ugears_1s_meta.menu_1_list" parent="ugears_1s_meta.menu_1"
+              action="ugears_1s_meta.action_window"/>
+    <menuitem name="Server to list" id="ugears_1s_meta" parent="ugears_1s_meta.menu_2"
+              action="ugears_1s_meta.action_server"/>
+-->
+  </data>
+</odoo>

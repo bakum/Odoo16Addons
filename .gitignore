@@ -1,0 +1,7 @@
+.idea
+
+/conf/
+/external_addons/
+/odoo-16.0/
+/theme_addons/
+/venv/
