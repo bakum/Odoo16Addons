@@ -24,12 +24,13 @@ class Company(pydantic.BaseModel):
         orm_mode = True
         getter_dict = utils.GenericOdooGetter
 
+
 class Partner(pydantic.BaseModel):
     id: int
     name: str
-    title: str |  None
+    title: str | None
     display_name: str
-    vat: str |  None
+    vat: str | None
     company_id: Company | None
     is_company: bool
 
@@ -43,6 +44,16 @@ class User(pydantic.BaseModel):
     login: str
     im_status: str
     company_id: Company
+
+    class Config:
+        orm_mode = True
+        getter_dict = utils.GenericOdooGetter
+
+
+class Product(pydantic.BaseModel):
+    id: int
+    name: str
+    active: bool
 
     class Config:
         orm_mode = True
