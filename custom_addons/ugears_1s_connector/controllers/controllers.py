@@ -7,7 +7,7 @@ def get_search_criterias(kw):
     search_criterias = []
     for key in kw:
         if key == 'operator':
-            search_criterias.insert(0, (kw[key]))
+            search_criterias.insert(0, kw[key])
             continue
         sent = kw[key]
         operator = '='
