@@ -3,6 +3,15 @@ import pydantic
 from . import utils
 
 
+class Country(pydantic.BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        orm_mode = True
+        getter_dict = utils.GenericOdooGetter
+
+
 class Currency(pydantic.BaseModel):
     id: int
     name: str
@@ -17,8 +26,11 @@ class Currency(pydantic.BaseModel):
 class Company(pydantic.BaseModel):
     id: int
     name: str
+    email: str | None
+    phone: str | None
     display_name: str
     vat: str | None
+    currency_id: Currency | None
 
     class Config:
         orm_mode = True
