@@ -18,7 +18,7 @@ class AccountJournal(pydantic.BaseModel):
 
 class AccountMoveLines(pydantic.BaseModel):
     id: int
-    name: str
+    name: str | None
     account_id: AccountAccount
     display_type: str
     debit: float | None
@@ -52,7 +52,7 @@ class AccountMove(pydantic.BaseModel):
     amount_untaxed: float | None
     amount_tax: float | None
     amount_total: float | None
-    line_ids: List[AccountMoveLines]
+    line_ids: List[AccountMoveLines] | None
 
     class Config:
         orm_mode = True
