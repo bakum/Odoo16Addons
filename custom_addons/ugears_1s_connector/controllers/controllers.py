@@ -6,6 +6,7 @@ from .orm.models import User, Company, Partner
 def get_search_criterias(kw):
     search_criterias = []
     for key in kw:
+        new_key = key
         if key == 'operator':
             search_criterias.insert(0, kw[key])
             continue
@@ -20,7 +21,9 @@ def get_search_criterias(kw):
             arg = sent['arg']
         except:
             pass
-        search_criterias.append((key, operator, arg))
+        if key=='date_begin' or key=='date_end':
+            new_key = 'date'
+        search_criterias.append((new_key, operator, arg))
     return search_criterias
 
 
