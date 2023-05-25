@@ -16,3 +16,38 @@ class Ugears1sAccountMove(http.Controller):
             mod = AccountMove.from_orm(move).dict()
             result.append(mod)
         return result if len(result) > 1 else mod
+
+
+class Ugears1sAccounBallans(http.Controller):
+    @http.route('/api/ugears/ballans', auth='bearer_api_key', website=False, type='json', cors=True,
+                methods=['GET'])
+    def index(self, **kw):
+        # search_criterias = get_search_criterias(kw)
+        account_result = []
+        sql = """select rc.id as company_id, rc.name as company_name,
+            account_move_line.company_currency_id as company_currency_id, rcuc.name as company_currency,
+            account_move_line.currency_id as currency_id, rcu.name as currency,
+            rp.id as partner_id, rp.name as partner_name, rp.vat as vat,
+            prod.id as product_id, ptmp.name as product_name,
+            journal_id as journal, aj.name as journal_name,
+            aa.code, aa.name acc_name, SUM(debit) as debit, SUM(credit) as credit,
+            (SUM(debit) - SUM(credit)) AS balance, SUM(amount_currency) as amount_currency from account_move_line
+        right join account_account aa on aa.id = account_move_line.account_id
+        right join res_company rc on rc.id = account_move_line.company_id
+        left join account_journal aj on account_move_line.journal_id = aj.id
+        left join res_partner rp on account_move_line.partner_id = rp.id
+        left join res_currency rcu on account_move_line.currency_id = rcu.id
+        left join res_currency rcuc on account_move_line.company_currency_id = rcuc.id
+        left join product_product prod on account_move_line.product_id = prod.id
+        left join product_template ptmp on prod.product_tmpl_id = ptmp.id
+            where account_move_line.date <= %(date)s
+        group by aa.code, aa.name, rc.name, rc.id, journal_id,
+            aj.name, rp.id, rp.name, rp.vat, account_move_line.currency_id, rcu.name,
+            account_move_line.company_currency_id, rcuc.name, prod.id, ptmp.name
+        order by aa.code, aj.name"""
+        http.request.env.cr.execute(sql,kw)
+        for row in http.request.env.cr.dictfetchall():
+            #account_result[row.pop('code')] = row
+            account_result.append(row)
+
+        return account_result

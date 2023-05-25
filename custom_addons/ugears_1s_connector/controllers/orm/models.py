@@ -17,6 +17,7 @@ class Currency(pydantic.BaseModel):
     name: str
     full_name: str
     symbol: str
+    code: str | None
 
     class Config:
         orm_mode = True
