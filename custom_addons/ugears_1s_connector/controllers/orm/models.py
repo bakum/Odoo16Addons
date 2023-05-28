@@ -52,6 +52,31 @@ class Partner(pydantic.BaseModel):
         getter_dict = utils.GenericOdooGetter
 
 
+class Bank(pydantic.BaseModel):
+    id: int
+    name: str
+    country: Country | None
+    bic: str | None
+
+    class Config:
+        orm_mode = True
+        getter_dict = utils.GenericOdooGetter
+
+
+class BankAcc(pydantic.BaseModel):
+    id: int
+    acc_number: str
+    sanitized_acc_number: str | None
+    partner_id: Partner | None
+    currency_id: Currency | None
+    company_id: Company | None
+    bank_id: Bank | None
+
+    class Config:
+        orm_mode = True
+        getter_dict = utils.GenericOdooGetter
+
+
 class User(pydantic.BaseModel):
     id: int
     login: str

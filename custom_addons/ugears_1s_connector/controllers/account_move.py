@@ -1,5 +1,5 @@
 from .controllers import get_search_criterias
-from .orm.account_move import AccountMove
+from .orm.account_move import AccountMove, AccountMoveLines
 from odoo import http
 
 
@@ -14,6 +14,20 @@ class Ugears1sAccountMove(http.Controller):
         mod = None
         for move in moves:
             mod = AccountMove.from_orm(move).dict()
+            result.append(mod)
+        return result if len(result) > 1 else mod
+
+class Ugears1sAccountMoveLines(http.Controller):
+    @http.route('/api/ugears/movelines', auth='bearer_api_key', website=False, type='json', cors=True,
+                methods=['GET', 'POST'])
+    def index(self, **kw):
+        search_criterias = get_search_criterias(kw)
+
+        moves = http.request.env["account.move.line"].sudo().search(search_criterias)
+        result = []
+        mod = None
+        for move in moves:
+            mod = AccountMoveLines.from_orm(move).dict()
             result.append(mod)
         return result if len(result) > 1 else mod
 
