@@ -17,3 +17,6 @@ class Ugears1sCategory(http.Controller):
                 mod = Category.from_orm(move).dict()
                 result.append(mod)
             return result if len(result) > 1 else mod
+
+        if http.request.httprequest.method == 'POST':
+            return result
