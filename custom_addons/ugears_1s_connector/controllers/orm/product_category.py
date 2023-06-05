@@ -1,4 +1,7 @@
 import pydantic
+from typing import Any, List
+
+from pydantic import Json
 
 from . import utils
 
@@ -16,8 +19,10 @@ class Category(pydantic.BaseModel):
 class PublicCategory(pydantic.BaseModel):
     id: int
     name: str
-    complete_name: str | None
+    parent_id: int | None
+    sequence: int | None
     parent_path: str
+    seo_name: Json[Any] | None
 
     class Config:
         orm_mode = True
