@@ -23,6 +23,11 @@
     # any module necessary for this one to work correctly
     'depends': ['base'],
 
+    'data': [
+        # 'security/ir.model.access.csv',
+        'views/currency_views.xml',
+    ],
+
     # always loaded
 
     # only loaded in demonstration mode
