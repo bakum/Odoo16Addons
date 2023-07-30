@@ -30,5 +30,6 @@
     ],
     # only loaded in demonstration mode
     'application': True,
-    'auto_install': False
+    'auto_install': False,
+    'license': 'LGPL-3',
 }
